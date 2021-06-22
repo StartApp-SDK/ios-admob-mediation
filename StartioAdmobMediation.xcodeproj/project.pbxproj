@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49C920E42677684500537C04 /* StartioAdmobInlineAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920E32677684500537C04 /* StartioAdmobInlineAdapter.m */; };
+		49C920E726776A3500537C04 /* StartioAdmobAdapterConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920E626776A3500537C04 /* StartioAdmobAdapterConfiguration.m */; };
+		49C920EA2679EC6200537C04 /* StartioAdmobNativeAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920E92679EC6200537C04 /* StartioAdmobNativeAdapter.m */; };
+		49C920ED267A51E000537C04 /* StartioAdmobNativeAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920EC267A51E000537C04 /* StartioAdmobNativeAd.m */; };
+		49C920F0267BD83D00537C04 /* StartioAdmobRewardedAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920EF267BD83D00537C04 /* StartioAdmobRewardedAdapter.m */; };
+		49E0C5C6267203290003B461 /* StartioAdmobFullscreenAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E0C5C4267203290003B461 /* StartioAdmobFullscreenAdapter.m */; };
+		49E0C5C7267203290003B461 /* StartioAdmobExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E0C5C5267203290003B461 /* StartioAdmobExtras.m */; };
+		ED9B8495527184076DDB3DA4 /* Pods_StartioAdmobMediation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE8848ADC000DD7734FA33C /* Pods_StartioAdmobMediation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		49E0C5B22671F2A40003B461 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2828AF625F8151899C2C71F5 /* Pods-StartioAdmobMediation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartioAdmobMediation.release.xcconfig"; path = "Target Support Files/Pods-StartioAdmobMediation/Pods-StartioAdmobMediation.release.xcconfig"; sourceTree = "<group>"; };
+		2BE8848ADC000DD7734FA33C /* Pods_StartioAdmobMediation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StartioAdmobMediation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49C920E22677684500537C04 /* StartioAdmobInlineAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobInlineAdapter.h; sourceTree = "<group>"; };
+		49C920E32677684500537C04 /* StartioAdmobInlineAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobInlineAdapter.m; sourceTree = "<group>"; };
+		49C920E526776A3500537C04 /* StartioAdmobAdapterConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobAdapterConfiguration.h; sourceTree = "<group>"; };
+		49C920E626776A3500537C04 /* StartioAdmobAdapterConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobAdapterConfiguration.m; sourceTree = "<group>"; };
+		49C920E82679EC6200537C04 /* StartioAdmobNativeAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobNativeAdapter.h; sourceTree = "<group>"; };
+		49C920E92679EC6200537C04 /* StartioAdmobNativeAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobNativeAdapter.m; sourceTree = "<group>"; };
+		49C920EB267A51E000537C04 /* StartioAdmobNativeAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobNativeAd.h; sourceTree = "<group>"; };
+		49C920EC267A51E000537C04 /* StartioAdmobNativeAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobNativeAd.m; sourceTree = "<group>"; };
+		49C920EE267BD83D00537C04 /* StartioAdmobRewardedAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobRewardedAdapter.h; sourceTree = "<group>"; };
+		49C920EF267BD83D00537C04 /* StartioAdmobRewardedAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobRewardedAdapter.m; sourceTree = "<group>"; };
+		49E0C5B42671F2A40003B461 /* libStartioAdmobMediation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStartioAdmobMediation.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		49E0C5C2267203290003B461 /* StartioAdmobFullscreenAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartioAdmobFullscreenAdapter.h; sourceTree = "<group>"; };
+		49E0C5C3267203290003B461 /* StartioAdmobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartioAdmobExtras.h; sourceTree = "<group>"; };
+		49E0C5C4267203290003B461 /* StartioAdmobFullscreenAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobFullscreenAdapter.m; sourceTree = "<group>"; };
+		49E0C5C5267203290003B461 /* StartioAdmobExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobExtras.m; sourceTree = "<group>"; };
+		FF0BF653F83C72548B45D5F4 /* Pods-StartioAdmobMediation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartioAdmobMediation.debug.xcconfig"; path = "Target Support Files/Pods-StartioAdmobMediation/Pods-StartioAdmobMediation.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49E0C5B12671F2A40003B461 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED9B8495527184076DDB3DA4 /* Pods_StartioAdmobMediation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3BB6B5F786C0148B933DC76A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BE8848ADC000DD7734FA33C /* Pods_StartioAdmobMediation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49E0C5AB2671F2A40003B461 = {
+			isa = PBXGroup;
+			children = (
+				49E0C5B62671F2A40003B461 /* StartioAdmobMediation */,
+				49E0C5B52671F2A40003B461 /* Products */,
+				C42BF22DFE82113D55588E0D /* Pods */,
+				3BB6B5F786C0148B933DC76A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		49E0C5B52671F2A40003B461 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49E0C5B42671F2A40003B461 /* libStartioAdmobMediation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49E0C5B62671F2A40003B461 /* StartioAdmobMediation */ = {
+			isa = PBXGroup;
+			children = (
+				49E0C5C2267203290003B461 /* StartioAdmobFullscreenAdapter.h */,
+				49E0C5C4267203290003B461 /* StartioAdmobFullscreenAdapter.m */,
+				49C920E22677684500537C04 /* StartioAdmobInlineAdapter.h */,
+				49C920E32677684500537C04 /* StartioAdmobInlineAdapter.m */,
+				49C920E82679EC6200537C04 /* StartioAdmobNativeAdapter.h */,
+				49C920E92679EC6200537C04 /* StartioAdmobNativeAdapter.m */,
+				49C920EB267A51E000537C04 /* StartioAdmobNativeAd.h */,
+				49C920EC267A51E000537C04 /* StartioAdmobNativeAd.m */,
+				49C920EE267BD83D00537C04 /* StartioAdmobRewardedAdapter.h */,
+				49C920EF267BD83D00537C04 /* StartioAdmobRewardedAdapter.m */,
+				49E0C5C3267203290003B461 /* StartioAdmobExtras.h */,
+				49E0C5C5267203290003B461 /* StartioAdmobExtras.m */,
+				49C920E526776A3500537C04 /* StartioAdmobAdapterConfiguration.h */,
+				49C920E626776A3500537C04 /* StartioAdmobAdapterConfiguration.m */,
+			);
+			path = StartioAdmobMediation;
+			sourceTree = "<group>";
+		};
+		C42BF22DFE82113D55588E0D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF0BF653F83C72548B45D5F4 /* Pods-StartioAdmobMediation.debug.xcconfig */,
+				2828AF625F8151899C2C71F5 /* Pods-StartioAdmobMediation.release.xcconfig */,
+			);
+			name = Pods;
+			path = "../ios-admob-mediation-sample/Pods";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49E0C5B32671F2A40003B461 /* StartioAdmobMediation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49E0C5BD2671F2A40003B461 /* Build configuration list for PBXNativeTarget "StartioAdmobMediation" */;
+			buildPhases = (
+				303F3346E165F3ABD2D91673 /* [CP] Check Pods Manifest.lock */,
+				49E0C5B02671F2A40003B461 /* Sources */,
+				49E0C5B12671F2A40003B461 /* Frameworks */,
+				49E0C5B22671F2A40003B461 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StartioAdmobMediation;
+			productName = StartioAdmobMediation;
+			productReference = 49E0C5B42671F2A40003B461 /* libStartioAdmobMediation.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49E0C5AC2671F2A40003B461 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					49E0C5B32671F2A40003B461 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 49E0C5AF2671F2A40003B461 /* Build configuration list for PBXProject "StartioAdmobMediation" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49E0C5AB2671F2A40003B461;
+			productRefGroup = 49E0C5B52671F2A40003B461 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49E0C5B32671F2A40003B461 /* StartioAdmobMediation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		303F3346E165F3ABD2D91673 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StartioAdmobMediation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49E0C5B02671F2A40003B461 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49C920E726776A3500537C04 /* StartioAdmobAdapterConfiguration.m in Sources */,
+				49E0C5C6267203290003B461 /* StartioAdmobFullscreenAdapter.m in Sources */,
+				49C920ED267A51E000537C04 /* StartioAdmobNativeAd.m in Sources */,
+				49E0C5C7267203290003B461 /* StartioAdmobExtras.m in Sources */,
+				49C920F0267BD83D00537C04 /* StartioAdmobRewardedAdapter.m in Sources */,
+				49C920E42677684500537C04 /* StartioAdmobInlineAdapter.m in Sources */,
+				49C920EA2679EC6200537C04 /* StartioAdmobNativeAdapter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		49E0C5BB2671F2A40003B461 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		49E0C5BC2671F2A40003B461 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		49E0C5BE2671F2A40003B461 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF0BF653F83C72548B45D5F4 /* Pods-StartioAdmobMediation.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 33VM6V4F88;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		49E0C5BF2671F2A40003B461 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2828AF625F8151899C2C71F5 /* Pods-StartioAdmobMediation.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 33VM6V4F88;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49E0C5AF2671F2A40003B461 /* Build configuration list for PBXProject "StartioAdmobMediation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49E0C5BB2671F2A40003B461 /* Debug */,
+				49E0C5BC2671F2A40003B461 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49E0C5BD2671F2A40003B461 /* Build configuration list for PBXNativeTarget "StartioAdmobMediation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49E0C5BE2671F2A40003B461 /* Debug */,
+				49E0C5BF2671F2A40003B461 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49E0C5AC2671F2A40003B461 /* Project object */;
+}
