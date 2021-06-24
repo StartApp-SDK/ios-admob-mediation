@@ -35,7 +35,7 @@ Banner/Medium Rectangle | StartioAdmobInlineAdapter | {"startioAppId":"your_id_f
 Rewarded | StartioAdmobRewardedAdapter | {"startioAppId":"your_id_from_portal", "adTag":"any_your_tag", "minCPM":0.02} |
 Native | StartioAdmobNativeAdapter | {"startioAppId":"your_id_from_portal", "adTag":"any_your_tag", "minCPM":0.02, "nativeImageSize":"SIZE150X150", "nativeSecondaryImageSize":"SIZE100X100"} | nativeImageSize and nativeSecondaryImageSize can be any of SIZE72X72, SIZE100X100, SIZE150X150, SIZE340X340, SIZE1200X628(for main image only) | 
 
-All parameters in the "custom event data" field are optional except the "startioAppId" which you must provide in any case.
+All parameters in the "Parameter" field are optional except the "startioAppId" which you must provide in any case.
 
 #### If you need additional assistance you can take a look on our app example which works with this mediation adapter [here](https://github.com/StartApp-SDK/ios-admob-mediation-sample)
 
