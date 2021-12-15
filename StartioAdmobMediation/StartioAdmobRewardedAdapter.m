@@ -93,9 +93,13 @@
 
 - (void)didShowAd:(STAAbstractAd*)ad {
     [self.delegate willPresentFullScreenView];
-    [self.delegate reportImpression];
     [self.delegate didStartVideo];
     NSLog(@"Start.io rewarded ad has been shown.");
+}
+
+- (void)didSendImpression:(STAAbstractAd *)ad {
+    [self.delegate reportImpression];
+    NSLog(@"Start.io rewarded ad did send impression");
 }
 
 - (void)failedShowAd:(STAAbstractAd*)ad withError:(NSError*)error {

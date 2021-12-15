@@ -87,14 +87,13 @@
     NSLog(@"Start.io native ad is failed to load, %@", error.localizedDescription);
 }
 
-- (void)didShowNativeAdDetails:(STANativeAdDetails*)nativeAdDetails {
+- (void)didSendImpressionForNativeAdDetails:(STANativeAdDetails *)nativeAdDetails {
     [GADMediatedUnifiedNativeAdNotificationSource mediatedNativeAdDidRecordImpression:self.mediatedAd];
     NSLog(@"Start.io native ad sent an impression.");
 }
 
 - (void)didClickNativeAdDetails:(STANativeAdDetails*)nativeAdDetails {
     [GADMediatedUnifiedNativeAdNotificationSource mediatedNativeAdDidRecordClick:self.mediatedAd];
-    [GADMediatedUnifiedNativeAdNotificationSource mediatedNativeAdWillLeaveApplication:self.mediatedAd];
     NSLog(@"Start.io native ad record a click.");
 }
 
