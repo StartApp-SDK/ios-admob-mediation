@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobAdAdapter.h"
+@import Foundation;
+
+@class GADMediationAdConfiguration;
+@class StartioAdmobParameters;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartioAdmobNativeAdapter : NSObject<StartioAdmobAdAdapter>
-
+@protocol StartioAdmobAdAdapter <NSObject>
+- (void)loadAdForAdConfiguration:(nonnull GADMediationAdConfiguration *)adConfiguration
+          startioAdmobParameters:(nonnull StartioAdmobParameters *)startioAdmobParameters
+               completionHandler:(id) completionHandler;
 @end
 
 NS_ASSUME_NONNULL_END

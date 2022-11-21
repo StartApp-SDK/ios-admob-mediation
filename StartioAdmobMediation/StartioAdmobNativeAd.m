@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Start.io Inc
+ * Copyright 2022 Start.io Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,6 +50,17 @@
     }
     return self;
 }
+
+#pragma mark - GADMediationNativeAd methods
+- (BOOL)handlesUserClicks {
+    return YES;
+}
+
+- (BOOL)handlesUserImpressions {
+    return YES;
+}
+
+#pragma mark - GADMediatedUnifiedNativeAd methods
 
 - (nullable NSString*)advertiser {
     return nil;
@@ -129,6 +140,7 @@
         [self.nativeAd registerViewForImpressionAndClick:view];
     }
 }
+
 
 - (void)didUntrackView:(UIView*)view {
     [self.nativeAd unregisterViews];

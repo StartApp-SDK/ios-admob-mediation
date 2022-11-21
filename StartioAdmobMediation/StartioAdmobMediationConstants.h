@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobAdAdapter.h"
+#ifndef StartioAdmobMediationConstants_h
+#define StartioAdmobMediationConstants_h
 
-NS_ASSUME_NONNULL_BEGIN
+static NSString *const StartioAdmobAdapterVersion = @"2.0.0";
 
-@interface StartioAdmobNativeAdapter : NSObject<StartioAdmobAdAdapter>
-
-@end
-
-NS_ASSUME_NONNULL_END
+#endif /* StartioAdmobMediationConstants_h */

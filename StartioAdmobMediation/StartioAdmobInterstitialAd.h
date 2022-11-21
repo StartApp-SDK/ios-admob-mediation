@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobAdAdapter.h"
+@import Foundation;
+@import GoogleMobileAds;
+@import StartApp;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartioAdmobNativeAdapter : NSObject<StartioAdmobAdAdapter>
+@interface StartioAdmobInterstitialAd : NSObject<GADMediationInterstitialAd>
+
+- (instancetype)initWithStartioAd:(STAStartAppAd *)ad;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

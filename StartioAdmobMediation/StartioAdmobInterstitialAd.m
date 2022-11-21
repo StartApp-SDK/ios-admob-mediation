@@ -14,12 +14,24 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobAdAdapter.h"
+#import "StartioAdmobInterstitialAd.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface StartioAdmobNativeAdapter : NSObject<StartioAdmobAdAdapter>
-
+@interface StartioAdmobInterstitialAd()
+@property (nonatomic, strong) STAStartAppAd *startioAd;
 @end
 
-NS_ASSUME_NONNULL_END
+@implementation StartioAdmobInterstitialAd
+
+- (instancetype)initWithStartioAd:(STAStartAppAd *)ad {
+    self = [super init];
+    if (self) {
+        _startioAd = ad;
+    }
+    return self;
+}
+
+- (void)presentFromViewController:(nonnull UIViewController *)viewController {
+    [self.startioAd showAd];
+}
+
+@end

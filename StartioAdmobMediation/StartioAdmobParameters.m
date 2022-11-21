@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Start.io Inc
+ * Copyright 2022 Start.io Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobExtras.h"
-#import <StartApp/StartApp.h>
+#import "StartioAdmobParameters.h"
+@import StartApp;
 
 static NSString* const kAppId = @"startioAppId";
 static NSString* const kInterstitialMode = @"interstitialMode";
@@ -25,38 +25,11 @@ static NSString* const kMuteVideo = @"muteVideo";
 static NSString* const kNativeImageSize = @"nativeImageSize";
 static NSString* const kNativeSecondaryImageSize = @"nativeSecondaryImageSize";
 
-static STANativeAdBitmapSize stringToBitmapSize(NSString* format) {
-    if ([format isEqualToString:@"SIZE72X72"]) {
-        return SIZE_72X72;
-    } else if ([format isEqualToString:@"SIZE100X100"]) {
-        return SIZE_100X100;
-    } else if ([format isEqualToString:@"SIZE150X150"]) {
-        return SIZE_150X150;
-    } else if ([format isEqualToString:@"SIZE340X340"]) {
-        return SIZE_340X340;
-    } else if ([format isEqualToString:@"SIZE1200X628"]) {
-        return SIZE_1200X628;
-    }
-    return SIZE_150X150;
-}
+@implementation StartioAdmobParameters
 
-@implementation StartioAdmobExtras
-
-- (instancetype)initWithJson:(nullable NSString*)jsonString {
+- (instancetype)initWithParametersJSON:(NSString *)paramsJSON {
     if (self = [self init]) {
-        _prefs = [[STANativeAdPreferences alloc] init];
-        _prefs.adsNumber = 1;
-        _prefs.autoBitmapDownload = NO;
-        
-        [self parseParams:jsonString];
-    }
-    return self;
-}
-
-- (instancetype)initWithJson:(nullable NSString*)jsonString lat:(CGFloat)lat lon:(CGFloat)lon {
-    if (self = [self initWithJson:jsonString]) {
-        _prefs.userLocation.latitude = lat;
-        _prefs.userLocation.longitude = lon;
+        [self parseParams:paramsJSON];
     }
     return self;
 }
@@ -80,26 +53,26 @@ static STANativeAdBitmapSize stringToBitmapSize(NSString* format) {
     if (jsonMap[kInterstitialMode]) {
         self.video = [jsonMap[kInterstitialMode] isEqualToString:@"VIDEO"];
     }
-    
+
     if (jsonMap[kAdTag]) {
-        self.prefs.adTag = jsonMap[kAdTag];
+        self.adTag = jsonMap[kAdTag];
     }
-    
+
     if (jsonMap[kMinCPM]) {
-        self.prefs.minCPM = [jsonMap[kMinCPM] doubleValue];
+        self.minCPM = [jsonMap[kMinCPM] doubleValue];
     }
-    
+
     if (jsonMap[kMuteVideo]) {
         // TODO: needs to implement in the sdk STAAdPreferences
         // self.prefs.muteVideo = [jsonMap[kMuteVideo] boolValue];
     }
-    
+
     if (jsonMap[kNativeImageSize]) {
-        self.prefs.primaryImageSize = stringToBitmapSize(jsonMap[kNativeImageSize]);
+        self.nativePrimaryImageSize = jsonMap[kNativeImageSize];
     }
-    
+
     if (jsonMap[kNativeSecondaryImageSize]) {
-        self.prefs.secondaryImageSize = stringToBitmapSize(jsonMap[kNativeSecondaryImageSize]);
+        self.nativeSecondaryImageSize = jsonMap[kNativeSecondaryImageSize];
     }
 }
 

@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobAdAdapter.h"
+#import "StartioAdmobRewardedAd.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface StartioAdmobNativeAdapter : NSObject<StartioAdmobAdAdapter>
+@implementation StartioAdmobRewardedAd
 
 @end
-
-NS_ASSUME_NONNULL_END

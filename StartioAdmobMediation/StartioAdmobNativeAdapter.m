@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Start.io Inc
+ * Copyright 2022 Start.io Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,85 +16,82 @@
 
 #import "StartioAdmobNativeAdapter.h"
 #import "StartioAdmobAdapterConfiguration.h"
-#import "StartioAdmobExtras.h"
+#import "StartioAdmobParameters.h"
 #import "StartioAdmobNativeAd.h"
+#import "STAAdPreferences+AdMob.h"
 
 @import GoogleMobileAds;
-#import <StartApp/StartApp.h>
+@import StartApp;
 
 
-@interface StartioAdmobNativeAdapter () <GADCustomEventNativeAd, STADelegateProtocol>
+@interface StartioAdmobNativeAdapter () <STADelegateProtocol>
 
-@property (nonatomic, nullable) STAStartAppNativeAd* startioAd;
-@property (nonatomic, nullable) StartioAdmobNativeAd* mediatedAd;
+@property (nonatomic, strong) STAStartAppNativeAd* startioAd;
+@property (nonatomic, copy) GADMediationNativeLoadCompletionHandler completionHandler;
+@property (nonatomic, weak) id<GADMediationNativeAdEventDelegate> delegate;
 
 @end
 
 @implementation StartioAdmobNativeAdapter
 
-@synthesize delegate;
-
-- (void)requestNativeAdWithParameter:(nonnull NSString*)serverParameter
-                             request:(nonnull GADCustomEventRequest*)request
-                             adTypes:(nonnull NSArray*)adTypes
-                             options:(nonnull NSArray*)options
-                  rootViewController:(nonnull UIViewController*)rootViewController {
+- (void)loadAdForAdConfiguration:(GADMediationNativeAdConfiguration *)adConfiguration
+          startioAdmobParameters:(StartioAdmobParameters *)startioAdmobParameters
+               completionHandler:(id)completionHandler {
+    self.completionHandler = completionHandler;
     
-    NSLog(@"Attempt to load Start.io native ad.");
-    StartioAdmobExtras* extras = request.userHasLocation
-        ? [[StartioAdmobExtras alloc] initWithJson:serverParameter lat:request.userLatitude lon:request.userLongitude]
-        : [[StartioAdmobExtras alloc] initWithJson:serverParameter];
-    [StartioAdmobAdapterConfiguration initializeSdkIfNecessary:extras.appId withTestAds:request.isTesting];
-    
-    for (GADNativeAdImageAdLoaderOptions* imageOptions in options) {
+    STANativeAdPreferences *adPrefs = [[STANativeAdPreferences alloc] initWithAdConfiguration:adConfiguration startioAdmobParameters:startioAdmobParameters];
+    for (GADNativeAdImageAdLoaderOptions* imageOptions in adConfiguration.options) {
         if (![imageOptions isKindOfClass:GADNativeAdImageAdLoaderOptions.class]) {
             continue;
         }
-        extras.prefs.autoBitmapDownload = !imageOptions.disableImageLoading;
+        adPrefs.autoBitmapDownload = !imageOptions.disableImageLoading;
     }
-    extras.prefs.adsNumber = 1;
+    adPrefs.adsNumber = 1;
     self.startioAd = [[STAStartAppNativeAd alloc] init];
-    [self.startioAd loadAdWithDelegate:self withNativeAdPreferences:extras.prefs];
-}
-
-- (BOOL)handlesUserClicks {
-    return YES;
-}
-
-- (BOOL)handlesUserImpressions {
-    return YES;
+    [self.startioAd loadAdWithDelegate:self withNativeAdPreferences:adPrefs];
 }
 
 #pragma mark - STADelegateProtocol
-
 - (void)didLoadAd:(STAAbstractAd*)ad {
-    if (self.startioAd != ad || self.startioAd.adsDetails.count <= 0) {
-        NSError* error = [NSError errorWithDomain:@"GADMediationAdapterStartioAdNetwork"
-                                             code:12
+    if (self.startioAd.adsDetails.count == 0) {
+        NSError* error = [NSError errorWithDomain:@"StartAppSDK"
+                                             code:STAErrorNoContent
                                          userInfo:@{NSLocalizedDescriptionKey:@"no fill"}];
-        [self.delegate customEventNativeAd:self didFailToLoadWithError:error];
+        if (self.completionHandler) {
+            self.completionHandler(nil, error);
+        }
         NSLog(@"Start.io native ad is empty. (no fill)");
     }
-    
-    STANativeAdDetails* details = self.startioAd.adsDetails.firstObject;
-    self.mediatedAd = [[StartioAdmobNativeAd alloc] initWithStartioNativeAd:details];
-    [self.delegate customEventNativeAd:self didReceiveMediatedUnifiedNativeAd:self.mediatedAd];
-    NSLog(@"Start.io native ad has been loaded successfully.");
+    else {
+        STANativeAdDetails* details = self.startioAd.adsDetails.firstObject;
+        
+        StartioAdmobNativeAd *nativeAd = [[StartioAdmobNativeAd alloc] initWithStartioNativeAd:details];
+        if (self.completionHandler) {
+            self.delegate = self.completionHandler(nativeAd, nil);
+        }
+        NSLog(@"Start.io native ad did load successfully.");
+    }
 }
 
 - (void)failedLoadAd:(STAAbstractAd*)ad withError:(NSError*)error {
-    [self.delegate customEventNativeAd:self didFailToLoadWithError:error];
-    NSLog(@"Start.io native ad is failed to load, %@", error.localizedDescription);
+    if (self.completionHandler) {
+        self.completionHandler(nil, error);
+    }
+    NSLog(@"Start.io native ad did fail to load with error \"%@\"", error.localizedDescription);
 }
 
 - (void)didSendImpressionForNativeAdDetails:(STANativeAdDetails *)nativeAdDetails {
-    [GADMediatedUnifiedNativeAdNotificationSource mediatedNativeAdDidRecordImpression:self.mediatedAd];
-    NSLog(@"Start.io native ad sent an impression.");
+    if ([self.delegate respondsToSelector:@selector(reportImpression)]) {
+        [self.delegate reportImpression];
+    }
+    NSLog(@"Start.io native ad did send an impression.");
 }
 
 - (void)didClickNativeAdDetails:(STANativeAdDetails*)nativeAdDetails {
-    [GADMediatedUnifiedNativeAdNotificationSource mediatedNativeAdDidRecordClick:self.mediatedAd];
-    NSLog(@"Start.io native ad record a click.");
+    if ([self.delegate respondsToSelector:@selector(reportClick)]) {
+        [self.delegate reportClick];
+    }
+    NSLog(@"Start.io native ad was clicked.");
 }
 
 @end

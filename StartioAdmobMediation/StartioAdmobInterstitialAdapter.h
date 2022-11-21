@@ -15,10 +15,11 @@
  */
 
 #import "StartioAdmobAdAdapter.h"
+@import StartApp;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartioAdmobNativeAdapter : NSObject<StartioAdmobAdAdapter>
+@interface StartioAdmobInterstitialAdapter : NSObject<StartioAdmobAdAdapter, STADelegateProtocol>
 
 @end
 

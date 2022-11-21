@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Start.io Inc
+ * Copyright 2022 Start.io Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,22 @@
  * limitations under the License.
  */
 
-@import Foundation;
+#import "StartioAdmobBannerAd.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface StartioAdmobFullscreenAdapter : NSObject
-
+@interface StartioAdmobBannerAd()
+@property (nonatomic, strong) STABannerView *bannerView;
 @end
 
-NS_ASSUME_NONNULL_END
+@implementation StartioAdmobBannerAd
+- (instancetype)initWithSTABannerView:(STABannerView *)bannerView {
+    self = [super init];
+    if (self) {
+        _bannerView = bannerView;
+    }
+    return self;
+}
+
+- (UIView *)view {
+    return self.bannerView;
+}
+@end
