@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobRewardedAdapter.h"
+#import "StartioAdmobRewardedAdLoader.h"
 #import "STAAdPreferences+AdMob.h"
-#import "StartioAdmobRewardedAd.h"
 
-@interface StartioAdmobRewardedAdapter ()
+@interface StartioAdmobRewardedAdLoader ()
 
 @property (nonatomic, strong) STAStartAppAd* startioAd;
-@property (nonatomic, copy) GADMediationRewardedLoadCompletionHandler completionHandler;
-@property (nonatomic, weak) id<GADMediationRewardedAdEventDelegate> delegate;
 
 @end
 
-@implementation StartioAdmobRewardedAdapter
-- (void)loadAdForAdConfiguration:(GADMediationRewardedAdConfiguration *)adConfiguration
-          startioAdmobParameters:(StartioAdmobParameters *)startioAdmobParameters
-               completionHandler:(id)completionHandler {
-    self.completionHandler = completionHandler;
-    
+@implementation StartioAdmobRewardedAdLoader
+
+- (void)performLoadWithAdConfiguration:(GADMediationRewardedAdConfiguration *)adConfiguration
+                startioAdmobParameters:(StartioAdmobParameters *)startioAdmobParameters {
     self.startioAd = [[STAStartAppAd alloc] init];
     
     STANativeAdPreferences *adPrefs = [[STANativeAdPreferences alloc] initWithAdConfiguration:adConfiguration startioAdmobParameters:startioAdmobParameters];
@@ -39,34 +34,41 @@
     [self.startioAd loadRewardedVideoAdWithDelegate:self withAdPreferences:adPrefs];
 }
 
+
 - (NSString *)adNameForLog {
     return @"rewarded";
 }
 
-#pragma mark - STADelegateProtocol
+#pragma mark STADelegateProtocol
 - (void)didLoadAd:(STAAbstractAd*)ad {
     if (self.completionHandler) {
         StartioAdmobRewardedAd *rewardedAd = [[StartioAdmobRewardedAd alloc] initWithStartioAd:self.startioAd];
         self.delegate = self.completionHandler(rewardedAd, nil);
+        self.completionHandler = nil;
     }
-    NSLog(@"Start.io %@ ad did load successfully.", self.adNameForLog);
+    StartioLog(@"Start.io %@ ad did load successfully.", self.adNameForLog);
 }
 
 - (void)didShowAd:(STAAbstractAd*)ad {
     [super didShowAd:ad];
     if ([self.delegate respondsToSelector:@selector(didStartVideo)]) {
-        [self.delegate didStartVideo];
+        [(id<GADMediationRewardedAdEventDelegate>)self.delegate didStartVideo];
     }
 }
 
 - (void)didCompleteVideo:(STAAbstractAd *)ad {
     if ([self.delegate respondsToSelector:@selector(didEndVideo)]) {
-        [self.delegate didEndVideo];
+        [(id<GADMediationRewardedAdEventDelegate>)self.delegate didEndVideo];
     }
     if ([self.delegate respondsToSelector:@selector(didRewardUser)]) {
-        [self.delegate didRewardUser];
+        [(id<GADMediationRewardedAdEventDelegate>)self.delegate didRewardUser];
     }
-    NSLog(@"Start.io %@ ad did reward user.", self.adNameForLog);
+    StartioLog(@"Start.io %@ ad did reward user.", self.adNameForLog);
 }
+
+@end
+
+#pragma mark - StartioAdmobRewardedAd
+@implementation StartioAdmobRewardedAd
 
 @end

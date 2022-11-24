@@ -7,18 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49C920E42677684500537C04 /* StartioAdmobBannerAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920E32677684500537C04 /* StartioAdmobBannerAdapter.m */; };
-		49C920EA2679EC6200537C04 /* StartioAdmobNativeAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920E92679EC6200537C04 /* StartioAdmobNativeAdapter.m */; };
-		49C920ED267A51E000537C04 /* StartioAdmobNativeAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920EC267A51E000537C04 /* StartioAdmobNativeAd.m */; };
-		49E0C5C6267203290003B461 /* StartioAdmobInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E0C5C4267203290003B461 /* StartioAdmobInterstitialAdapter.m */; };
+		49C920E42677684500537C04 /* StartioAdmobBannerAdLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920E32677684500537C04 /* StartioAdmobBannerAdLoader.m */; };
+		49C920EA2679EC6200537C04 /* StartioAdmobNativeAdLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C920E92679EC6200537C04 /* StartioAdmobNativeAdLoader.m */; };
+		49E0C5C6267203290003B461 /* StartioAdmobInterstitialAdLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E0C5C4267203290003B461 /* StartioAdmobInterstitialAdLoader.m */; };
 		49E0C5C7267203290003B461 /* StartioAdmobParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E0C5C5267203290003B461 /* StartioAdmobParameters.m */; };
-		E7049D1C291BF7C8001A7744 /* StartioAdmobInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E7049D1B291BF7C7001A7744 /* StartioAdmobInterstitialAd.m */; };
-		E74F928129239DBE00F7BFAA /* StartioAdmobRewardedAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = E74F928029239DBE00F7BFAA /* StartioAdmobRewardedAdapter.m */; };
+		E74F928129239DBE00F7BFAA /* StartioAdmobRewardedAdLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E74F928029239DBE00F7BFAA /* StartioAdmobRewardedAdLoader.m */; };
 		E74F92842923E29000F7BFAA /* STAAdPreferences+AdMob.m in Sources */ = {isa = PBXBuildFile; fileRef = E74F92832923E29000F7BFAA /* STAAdPreferences+AdMob.m */; };
 		E74F92872923F1B400F7BFAA /* STANativeAdPreferences+AdMob.m in Sources */ = {isa = PBXBuildFile; fileRef = E74F92862923F1B400F7BFAA /* STANativeAdPreferences+AdMob.m */; };
-		E74F928A2924E6F900F7BFAA /* StartioAdmobRewardedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E74F92892924E6F900F7BFAA /* StartioAdmobRewardedAd.m */; };
-		E74F928D292543D800F7BFAA /* StartioAdmobBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E74F928C292543D800F7BFAA /* StartioAdmobBannerAd.m */; };
-		E79FF6972911519B0049EF7F /* StartioAdmobCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E79FF6962911519B0049EF7F /* StartioAdmobCustomEvent.m */; };
+		E761ED5A292E205800479098 /* StartioAdmobBaseAdLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E761ED59292E205800479098 /* StartioAdmobBaseAdLoader.m */; };
+		E79FF6972911519B0049EF7F /* StartioAdmobAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = E79FF6962911519B0049EF7F /* StartioAdmobAdapter.m */; };
 		ED9B8495527184076DDB3DA4 /* Pods_StartioAdmobMediation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE8848ADC000DD7734FA33C /* Pods_StartioAdmobMediation.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,32 +34,26 @@
 /* Begin PBXFileReference section */
 		2828AF625F8151899C2C71F5 /* Pods-StartioAdmobMediation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartioAdmobMediation.release.xcconfig"; path = "Target Support Files/Pods-StartioAdmobMediation/Pods-StartioAdmobMediation.release.xcconfig"; sourceTree = "<group>"; };
 		2BE8848ADC000DD7734FA33C /* Pods_StartioAdmobMediation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StartioAdmobMediation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		49C920E22677684500537C04 /* StartioAdmobBannerAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobBannerAdapter.h; sourceTree = "<group>"; };
-		49C920E32677684500537C04 /* StartioAdmobBannerAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobBannerAdapter.m; sourceTree = "<group>"; };
-		49C920E82679EC6200537C04 /* StartioAdmobNativeAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobNativeAdapter.h; sourceTree = "<group>"; };
-		49C920E92679EC6200537C04 /* StartioAdmobNativeAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobNativeAdapter.m; sourceTree = "<group>"; };
-		49C920EB267A51E000537C04 /* StartioAdmobNativeAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobNativeAd.h; sourceTree = "<group>"; };
-		49C920EC267A51E000537C04 /* StartioAdmobNativeAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobNativeAd.m; sourceTree = "<group>"; };
+		49C920E22677684500537C04 /* StartioAdmobBannerAdLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobBannerAdLoader.h; sourceTree = "<group>"; };
+		49C920E32677684500537C04 /* StartioAdmobBannerAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobBannerAdLoader.m; sourceTree = "<group>"; };
+		49C920E82679EC6200537C04 /* StartioAdmobNativeAdLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobNativeAdLoader.h; sourceTree = "<group>"; };
+		49C920E92679EC6200537C04 /* StartioAdmobNativeAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobNativeAdLoader.m; sourceTree = "<group>"; };
 		49E0C5B42671F2A40003B461 /* libStartioAdmobMediation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStartioAdmobMediation.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		49E0C5C2267203290003B461 /* StartioAdmobInterstitialAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartioAdmobInterstitialAdapter.h; sourceTree = "<group>"; };
+		49E0C5C2267203290003B461 /* StartioAdmobInterstitialAdLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartioAdmobInterstitialAdLoader.h; sourceTree = "<group>"; };
 		49E0C5C3267203290003B461 /* StartioAdmobParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartioAdmobParameters.h; sourceTree = "<group>"; };
-		49E0C5C4267203290003B461 /* StartioAdmobInterstitialAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobInterstitialAdapter.m; sourceTree = "<group>"; };
+		49E0C5C4267203290003B461 /* StartioAdmobInterstitialAdLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobInterstitialAdLoader.m; sourceTree = "<group>"; };
 		49E0C5C5267203290003B461 /* StartioAdmobParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobParameters.m; sourceTree = "<group>"; };
-		E7049D1A291BF7C7001A7744 /* StartioAdmobInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobInterstitialAd.h; sourceTree = "<group>"; };
-		E7049D1B291BF7C7001A7744 /* StartioAdmobInterstitialAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobInterstitialAd.m; sourceTree = "<group>"; };
-		E74F927F29239DBE00F7BFAA /* StartioAdmobRewardedAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobRewardedAdapter.h; sourceTree = "<group>"; };
-		E74F928029239DBE00F7BFAA /* StartioAdmobRewardedAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobRewardedAdapter.m; sourceTree = "<group>"; };
+		E74F927F29239DBE00F7BFAA /* StartioAdmobRewardedAdLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobRewardedAdLoader.h; sourceTree = "<group>"; };
+		E74F928029239DBE00F7BFAA /* StartioAdmobRewardedAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobRewardedAdLoader.m; sourceTree = "<group>"; };
 		E74F92822923E29000F7BFAA /* STAAdPreferences+AdMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STAAdPreferences+AdMob.h"; sourceTree = "<group>"; };
 		E74F92832923E29000F7BFAA /* STAAdPreferences+AdMob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "STAAdPreferences+AdMob.m"; sourceTree = "<group>"; };
 		E74F92852923F1B400F7BFAA /* STANativeAdPreferences+AdMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STANativeAdPreferences+AdMob.h"; sourceTree = "<group>"; };
 		E74F92862923F1B400F7BFAA /* STANativeAdPreferences+AdMob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "STANativeAdPreferences+AdMob.m"; sourceTree = "<group>"; };
-		E74F92882924E6F900F7BFAA /* StartioAdmobRewardedAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobRewardedAd.h; sourceTree = "<group>"; };
-		E74F92892924E6F900F7BFAA /* StartioAdmobRewardedAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobRewardedAd.m; sourceTree = "<group>"; };
-		E74F928B292543D800F7BFAA /* StartioAdmobBannerAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobBannerAd.h; sourceTree = "<group>"; };
-		E74F928C292543D800F7BFAA /* StartioAdmobBannerAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobBannerAd.m; sourceTree = "<group>"; };
-		E761ED58292B699000479098 /* StartioAdmobAdAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobAdAdapter.h; sourceTree = "<group>"; };
-		E79FF6952911519B0049EF7F /* StartioAdmobCustomEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobCustomEvent.h; sourceTree = "<group>"; };
-		E79FF6962911519B0049EF7F /* StartioAdmobCustomEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobCustomEvent.m; sourceTree = "<group>"; };
+		E761ED58292B699000479098 /* StartioAdmobBaseAdLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobBaseAdLoader.h; sourceTree = "<group>"; };
+		E761ED59292E205800479098 /* StartioAdmobBaseAdLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobBaseAdLoader.m; sourceTree = "<group>"; };
+		E761ED6B292FBAB500479098 /* StartioAdmobUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobUtils.h; sourceTree = "<group>"; };
+		E79FF6952911519B0049EF7F /* StartioAdmobAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobAdapter.h; sourceTree = "<group>"; };
+		E79FF6962911519B0049EF7F /* StartioAdmobAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartioAdmobAdapter.m; sourceTree = "<group>"; };
 		E79FF698291154820049EF7F /* StartioAdmobMediationConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartioAdmobMediationConstants.h; sourceTree = "<group>"; };
 		FF0BF653F83C72548B45D5F4 /* Pods-StartioAdmobMediation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StartioAdmobMediation.debug.xcconfig"; path = "Target Support Files/Pods-StartioAdmobMediation/Pods-StartioAdmobMediation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,28 +99,22 @@
 		49E0C5B62671F2A40003B461 /* StartioAdmobMediation */ = {
 			isa = PBXGroup;
 			children = (
+				E761ED6B292FBAB500479098 /* StartioAdmobUtils.h */,
 				E79FF698291154820049EF7F /* StartioAdmobMediationConstants.h */,
-				E761ED58292B699000479098 /* StartioAdmobAdAdapter.h */,
 				49E0C5C3267203290003B461 /* StartioAdmobParameters.h */,
 				49E0C5C5267203290003B461 /* StartioAdmobParameters.m */,
-				E79FF6952911519B0049EF7F /* StartioAdmobCustomEvent.h */,
-				E79FF6962911519B0049EF7F /* StartioAdmobCustomEvent.m */,
-				49E0C5C2267203290003B461 /* StartioAdmobInterstitialAdapter.h */,
-				49E0C5C4267203290003B461 /* StartioAdmobInterstitialAdapter.m */,
-				E74F927F29239DBE00F7BFAA /* StartioAdmobRewardedAdapter.h */,
-				E74F928029239DBE00F7BFAA /* StartioAdmobRewardedAdapter.m */,
-				49C920E22677684500537C04 /* StartioAdmobBannerAdapter.h */,
-				49C920E32677684500537C04 /* StartioAdmobBannerAdapter.m */,
-				49C920E82679EC6200537C04 /* StartioAdmobNativeAdapter.h */,
-				49C920E92679EC6200537C04 /* StartioAdmobNativeAdapter.m */,
-				E7049D1A291BF7C7001A7744 /* StartioAdmobInterstitialAd.h */,
-				E7049D1B291BF7C7001A7744 /* StartioAdmobInterstitialAd.m */,
-				E74F92882924E6F900F7BFAA /* StartioAdmobRewardedAd.h */,
-				E74F92892924E6F900F7BFAA /* StartioAdmobRewardedAd.m */,
-				E74F928B292543D800F7BFAA /* StartioAdmobBannerAd.h */,
-				E74F928C292543D800F7BFAA /* StartioAdmobBannerAd.m */,
-				49C920EB267A51E000537C04 /* StartioAdmobNativeAd.h */,
-				49C920EC267A51E000537C04 /* StartioAdmobNativeAd.m */,
+				E79FF6952911519B0049EF7F /* StartioAdmobAdapter.h */,
+				E79FF6962911519B0049EF7F /* StartioAdmobAdapter.m */,
+				E761ED58292B699000479098 /* StartioAdmobBaseAdLoader.h */,
+				E761ED59292E205800479098 /* StartioAdmobBaseAdLoader.m */,
+				49E0C5C2267203290003B461 /* StartioAdmobInterstitialAdLoader.h */,
+				49E0C5C4267203290003B461 /* StartioAdmobInterstitialAdLoader.m */,
+				E74F927F29239DBE00F7BFAA /* StartioAdmobRewardedAdLoader.h */,
+				E74F928029239DBE00F7BFAA /* StartioAdmobRewardedAdLoader.m */,
+				49C920E22677684500537C04 /* StartioAdmobBannerAdLoader.h */,
+				49C920E32677684500537C04 /* StartioAdmobBannerAdLoader.m */,
+				49C920E82679EC6200537C04 /* StartioAdmobNativeAdLoader.h */,
+				49C920E92679EC6200537C04 /* StartioAdmobNativeAdLoader.m */,
 				E74F92822923E29000F7BFAA /* STAAdPreferences+AdMob.h */,
 				E74F92832923E29000F7BFAA /* STAAdPreferences+AdMob.m */,
 				E74F92852923F1B400F7BFAA /* STANativeAdPreferences+AdMob.h */,
@@ -231,17 +216,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E74F92872923F1B400F7BFAA /* STANativeAdPreferences+AdMob.m in Sources */,
-				49E0C5C6267203290003B461 /* StartioAdmobInterstitialAdapter.m in Sources */,
-				E7049D1C291BF7C8001A7744 /* StartioAdmobInterstitialAd.m in Sources */,
-				49C920ED267A51E000537C04 /* StartioAdmobNativeAd.m in Sources */,
+				49E0C5C6267203290003B461 /* StartioAdmobInterstitialAdLoader.m in Sources */,
 				E74F92842923E29000F7BFAA /* STAAdPreferences+AdMob.m in Sources */,
 				49E0C5C7267203290003B461 /* StartioAdmobParameters.m in Sources */,
-				E74F928D292543D800F7BFAA /* StartioAdmobBannerAd.m in Sources */,
-				E74F928A2924E6F900F7BFAA /* StartioAdmobRewardedAd.m in Sources */,
-				E79FF6972911519B0049EF7F /* StartioAdmobCustomEvent.m in Sources */,
-				49C920E42677684500537C04 /* StartioAdmobBannerAdapter.m in Sources */,
-				49C920EA2679EC6200537C04 /* StartioAdmobNativeAdapter.m in Sources */,
-				E74F928129239DBE00F7BFAA /* StartioAdmobRewardedAdapter.m in Sources */,
+				E761ED5A292E205800479098 /* StartioAdmobBaseAdLoader.m in Sources */,
+				E79FF6972911519B0049EF7F /* StartioAdmobAdapter.m in Sources */,
+				49C920E42677684500537C04 /* StartioAdmobBannerAdLoader.m in Sources */,
+				49C920EA2679EC6200537C04 /* StartioAdmobNativeAdLoader.m in Sources */,
+				E74F928129239DBE00F7BFAA /* StartioAdmobRewardedAdLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

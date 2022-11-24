@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Start.io Inc
+ * Copyright 2022 Start.io Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,11 @@
  */
 
 @import Foundation;
+@import GoogleMobileAds;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartioAdmobAdapterConfiguration : NSObject
-
-+ (void)initializeSdkIfNecessary:(NSString*)appId withTestAds:(BOOL)testEnabled;
+@interface StartioAdmobAdapter : NSObject <GADMediationAdapter>
 
 @end
 

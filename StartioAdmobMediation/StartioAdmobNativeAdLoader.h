@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobBannerAd.h"
+#import "StartioAdmobBaseAdLoader.h"
 
-@interface StartioAdmobBannerAd()
-@property (nonatomic, strong) STABannerView *bannerView;
+NS_ASSUME_NONNULL_BEGIN
+
+@interface StartioAdmobNativeAdLoader : StartioAdmobBaseAdLoader
+
 @end
 
-@implementation StartioAdmobBannerAd
-- (instancetype)initWithSTABannerView:(STABannerView *)bannerView {
-    self = [super init];
-    if (self) {
-        _bannerView = bannerView;
-    }
-    return self;
-}
-
-- (UIView *)view {
-    return self.bannerView;
-}
+@interface StartioAdmobNativeAd : NSObject <GADMediationNativeAd>
+- (instancetype)initWithStartioNativeAd:(STANativeAdDetails*)nativeAd;
+- (instancetype)init NS_UNAVAILABLE;
 @end
+
+NS_ASSUME_NONNULL_END

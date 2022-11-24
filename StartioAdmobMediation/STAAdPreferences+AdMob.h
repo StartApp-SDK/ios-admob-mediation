@@ -15,14 +15,13 @@
  */
 
 #import "StartioAdmobParameters.h"
-
 @import StartApp;
 @import GoogleMobileAds;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface STAAdPreferences (AdMob)
-- (instancetype)initWithAdConfiguration:(nonnull GADMediationAdConfiguration *)adConfiguration startioAdmobParameters:(nonnull StartioAdmobParameters *)parameters;
+- (instancetype)initWithAdConfiguration:(GADMediationAdConfiguration *)adConfiguration startioAdmobParameters:(StartioAdmobParameters *)parameters;
 @end
 
 NS_ASSUME_NONNULL_END

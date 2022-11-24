@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobAdAdapter.h"
+#import "StartioAdmobBaseAdLoader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartioAdmobBannerAdapter : NSObject<StartioAdmobAdAdapter>
+@interface StartioAdmobInterstitialAdLoader : StartioAdmobBaseAdLoader <STADelegateProtocol>
 
+@end
+
+@interface StartioAdmobInterstitialAd : NSObject<GADMediationInterstitialAd>
+- (instancetype)initWithStartioAd:(STAStartAppAd *)ad;
+- (instancetype)init NS_UNAVAILABLE;
 @end
 
 NS_ASSUME_NONNULL_END

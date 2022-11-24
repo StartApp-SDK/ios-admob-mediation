@@ -14,31 +14,25 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobBannerAdapter.h"
-#import "StartioAdmobAdapterConfiguration.h"
-#import "StartioAdmobParameters.h"
-#import "StartioAdmobBannerAd.h"
+#import "StartioAdmobBannerAdLoader.h"
 #import "STAAdPreferences+AdMob.h"
 
-@import GoogleMobileAds;
-
-@interface StartioAdmobBannerAdapter () <STABannerDelegateProtocol>
+@interface StartioAdmobBannerAdLoader () <STABannerDelegateProtocol>
 
 @property (nonatomic, strong) UIView* fakeView;
 @property (nonatomic, strong) STABannerView* bannerView;
 @property (nonatomic, assign) BOOL isAutoSizeBanner;
-@property (nonatomic, copy) GADMediationBannerLoadCompletionHandler completionHandler;
-@property (nonatomic, weak) id<GADMediationBannerAdEventDelegate> delegate;
 
 @end
 
-@implementation StartioAdmobBannerAdapter
+@implementation StartioAdmobBannerAdLoader
 
-- (void)loadAdForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
-          startioAdmobParameters:(StartioAdmobParameters *)startioAdmobParameters
-               completionHandler:(id)completionHandler {
-    self.completionHandler = completionHandler;
-    
+- (id<GADMediationBannerAdEventDelegate>)delegate {
+    return (id<GADMediationBannerAdEventDelegate>)[super delegate];
+}
+
+- (void)performLoadWithAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
+                startioAdmobParameters:(StartioAdmobParameters *)startioAdmobParameters {
     STAAdPreferences *adPrefs = [[STAAdPreferences alloc] initWithAdConfiguration:adConfiguration startioAdmobParameters:startioAdmobParameters];
     
     GADAdSize gadSize = adConfiguration.adSize;
@@ -106,42 +100,63 @@
     return bannerView;
 }
 
-#pragma mark - STABannerDelegateProtocol
+#pragma mark STABannerDelegateProtocol
 - (void)bannerAdIsReadyToDisplay:(STABannerViewBase *)banner {
     if (self.completionHandler) {
         StartioAdmobBannerAd *bannerAd = [[StartioAdmobBannerAd alloc] initWithSTABannerView:self.bannerView];
         self.delegate = self.completionHandler(bannerAd, nil);
+        self.completionHandler = nil;
     }
-    NSLog(@"Start.io banner ad did load successfully.");
+    StartioLog(@"Start.io banner ad did load successfully.");
 }
 
 - (void)didDisplayBannerAd:(STABannerViewBase *)banner {
     if (self.isAutoSizeBanner && self.completionHandler) {
         StartioAdmobBannerAd *bannerAd = [[StartioAdmobBannerAd alloc] initWithSTABannerView:self.bannerView];
         self.delegate = self.completionHandler(bannerAd, nil);
+        self.completionHandler = nil;
     }
-    NSLog(@"Start.io banner ad did display.");
+    StartioLog(@"Start.io banner ad did display.");
 }
 
 - (void)failedLoadBannerAd:(STABannerView*)banner withError:(NSError*)error {
     if (self.completionHandler) {
         self.completionHandler(nil, error);
     }
-    NSLog(@"Start.io banner ad did fail to load with error \"%@\"", error.localizedDescription);
+    StartioLog(@"Start.io banner ad did fail to load with error \"%@\"", error.localizedDescription);
 }
 
 - (void)didSendImpressionForBannerAd:(STABannerViewBase *)banner {
     if ([self.delegate respondsToSelector:@selector(reportImpression)]) {
         [self.delegate reportImpression];
     }
-    NSLog(@"Start.io banner ad did report impression.");
+    StartioLog(@"Start.io banner ad did report impression.");
 }
 
 - (void)didClickBannerAd:(STABannerView*)banner {
     if ([self.delegate respondsToSelector:@selector(reportClick)]) {
         [self.delegate reportClick];
     }
-    NSLog(@"Start.io banner ad was clicked.");
+    StartioLog(@"Start.io banner ad was clicked.");
 }
 
+@end
+
+#pragma mark - StartioAdmobBannerAd
+@interface StartioAdmobBannerAd()
+@property (nonatomic, strong) STABannerView *bannerView;
+@end
+
+@implementation StartioAdmobBannerAd
+- (instancetype)initWithSTABannerView:(STABannerView *)bannerView {
+    self = [super init];
+    if (self) {
+        _bannerView = bannerView;
+    }
+    return self;
+}
+
+- (UIView *)view {
+    return self.bannerView;
+}
 @end

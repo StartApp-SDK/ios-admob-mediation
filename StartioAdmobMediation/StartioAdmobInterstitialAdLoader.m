@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobInterstitialAdapter.h"
-#import "StartioAdmobParameters.h"
-#import "StartioAdmobInterstitialAd.h"
+#import "StartioAdmobInterstitialAdLoader.h"
 #import "STAAdPreferences+AdMob.h"
 
-@interface StartioAdmobInterstitialAdapter ()
+@interface StartioAdmobInterstitialAdLoader ()
 
 @property (nonatomic, strong) STAStartAppAd* startioAd;
-@property (nonatomic, copy) GADMediationInterstitialLoadCompletionHandler completionHandler;
-@property (nonatomic, weak) id<GADMediationInterstitialAdEventDelegate> delegate;
 
 @end
 
-@implementation StartioAdmobInterstitialAdapter
+@implementation StartioAdmobInterstitialAdLoader
 
-- (void)loadAdForAdConfiguration:(nonnull GADMediationInterstitialAdConfiguration *)adConfiguration
-          startioAdmobParameters:(nonnull StartioAdmobParameters *)startioAdmobParameters
-               completionHandler:(id)completionHandler {
-    
-    self.completionHandler = completionHandler;
-    
+- (void)performLoadWithAdConfiguration:(GADMediationInterstitialAdConfiguration *)adConfiguration
+                startioAdmobParameters:(StartioAdmobParameters *)startioAdmobParameters {
     self.startioAd = [[STAStartAppAd alloc] init];
     
     STAAdPreferences *adPrefs = [[STAAdPreferences alloc] initWithAdConfiguration:adConfiguration startioAdmobParameters:startioAdmobParameters];
@@ -51,41 +43,43 @@
     return @"interstitial";
 }
 
-#pragma mark - STADelegateProtocol
+#pragma mark STADelegateProtocol
 - (void)didLoadAd:(STAAbstractAd*)ad {
     if (self.completionHandler) {
         StartioAdmobInterstitialAd *interstitialAd = [[StartioAdmobInterstitialAd alloc] initWithStartioAd:self.startioAd];
         self.delegate = self.completionHandler(interstitialAd, nil);
+        self.completionHandler = nil;
     }
-    NSLog(@"Start.io %@ ad did load successfully.", self.adNameForLog);
+    StartioLog(@"Start.io %@ ad did load successfully.", self.adNameForLog);
 }
 
 - (void)failedLoadAd:(STAAbstractAd*)ad withError:(NSError*)error {
     if (self.completionHandler) {
         self.completionHandler(nil, error);
+        self.completionHandler = nil;
     }
-    NSLog(@"Start.io %@ ad did fail to load with error \"%@\"", self.adNameForLog, error.localizedDescription);
+    StartioLog(@"Start.io %@ ad did fail to load with error \"%@\"", self.adNameForLog, error.localizedDescription);
 }
 
 - (void)didShowAd:(STAAbstractAd*)ad {
     if ([self.delegate respondsToSelector:@selector(willPresentFullScreenView)]) {
         [self.delegate willPresentFullScreenView];
     }
-    NSLog(@"Start.io %@ ad did show.", self.adNameForLog);
+    StartioLog(@"Start.io %@ ad did show.", self.adNameForLog);
 }
 
 - (void)didSendImpression:(STAAbstractAd *)ad {
     if ([self.delegate respondsToSelector:@selector(reportImpression)]) {
         [self.delegate reportImpression];
     }
-    NSLog(@"Start.io %@ ad did send impression.", self.adNameForLog);
+    StartioLog(@"Start.io %@ ad did send impression.", self.adNameForLog);
 }
 
 - (void)failedShowAd:(STAAbstractAd*)ad withError:(NSError*)error {
     if ([self.delegate respondsToSelector:@selector(didFailToPresentWithError:)]) {
         [self.delegate didFailToPresentWithError:error];
     }
-    NSLog(@"Start.io %@ did fail to show, %@", self.adNameForLog, error.localizedDescription);
+    StartioLog(@"Start.io %@ did fail to show, %@", self.adNameForLog, error.localizedDescription);
 }
 
 - (void)didCloseAd:(STAAbstractAd*)ad {
@@ -95,15 +89,34 @@
     if ([self.delegate respondsToSelector:@selector(didDismissFullScreenView)]) {
         [self.delegate didDismissFullScreenView];
     }
-    NSLog(@"Start.io %@ did dismiss.", self.adNameForLog);
+    StartioLog(@"Start.io %@ did dismiss.", self.adNameForLog);
 }
 
 - (void)didClickAd:(STAAbstractAd*)ad {
     if ([self.delegate respondsToSelector:@selector(reportClick)]) {
         [self.delegate reportClick];
     }
-    NSLog(@"Start.io %@ ad was clicked.", self.adNameForLog);
+    StartioLog(@"Start.io %@ ad was clicked.", self.adNameForLog);
+}
+@end
+
+#pragma mark - StartioAdmobInterstitialAd
+@interface StartioAdmobInterstitialAd()
+@property (nonatomic, strong) STAStartAppAd *startioAd;
+@end
+
+@implementation StartioAdmobInterstitialAd
+
+- (instancetype)initWithStartioAd:(STAStartAppAd *)ad {
+    self = [super init];
+    if (self) {
+        _startioAd = ad;
+    }
+    return self;
 }
 
+- (void)presentFromViewController:(UIViewController *)viewController {
+    [self.startioAd showAd];
+}
 
 @end

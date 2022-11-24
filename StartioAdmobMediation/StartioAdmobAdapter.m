@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobCustomEvent.h"
+#import "StartioAdmobAdapter.h"
 #import "StartioAdmobMediationConstants.h"
-#import "StartioAdmobInterstitialAdapter.h"
-#import "StartioAdmobRewardedAdapter.h"
-#import "StartioAdmobBannerAdapter.h"
-#import "StartioAdmobNativeAdapter.h"
+#import "StartioAdmobInterstitialAdLoader.h"
+#import "StartioAdmobRewardedAdLoader.h"
+#import "StartioAdmobBannerAdLoader.h"
+#import "StartioAdmobNativeAdLoader.h"
 #import "StartioAdmobParameters.h"
 
 @import StartApp;
 
 static NSString* const kSettingsParameterKey = @"parameter";
 
-@interface StartioAdmobCustomEvent ()
-@property (nonatomic, strong) StartioAdmobInterstitialAdapter *interstitialAdapter;
-@property (nonatomic, strong) StartioAdmobRewardedAdapter *rewardedAdapter;
-@property (nonatomic, strong) StartioAdmobBannerAdapter *bannerAdapter;
-@property (nonatomic, strong) StartioAdmobNativeAdapter *nativeAdapter;
+@interface StartioAdmobAdapter ()
+@property (nonatomic, strong) StartioAdmobInterstitialAdLoader *interstitialAdLoader;
+@property (nonatomic, strong) StartioAdmobRewardedAdLoader *rewardedAdLoader;
+@property (nonatomic, strong) StartioAdmobBannerAdLoader *bannerAdLoader;
+@property (nonatomic, strong) StartioAdmobNativeAdLoader *nativeAdLoader;
 @end
 
-@implementation StartioAdmobCustomEvent
+@implementation StartioAdmobAdapter
 
 + (GADVersionNumber)adapterVersion {
     return [self GADVersionFromString:StartioAdmobAdapterVersion];
@@ -41,14 +41,9 @@ static NSString* const kSettingsParameterKey = @"parameter";
 
 + (GADVersionNumber)adSDKVersion {
     __block NSString *version = nil;
-    if ([NSThread isMainThread]) {
+    [self executeBlockOnMainThread:^{
         version = [[STAStartAppSDK sharedInstance] version];
-    }
-    else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            version = [[STAStartAppSDK sharedInstance] version];
-        });
-    }
+    }];
     return [self GADVersionFromString:version];
 }
 
@@ -58,24 +53,20 @@ static NSString* const kSettingsParameterKey = @"parameter";
 
 + (void)setUpWithConfiguration:(GADMediationServerConfiguration *)serverConfiguration completionHandler:(GADMediationAdapterSetUpCompletionBlock)completionHandler {
     if (serverConfiguration.credentials.count == 0) {
-        completionHandler([NSError errorWithDomain:GADErrorDomain code:GADErrorMediationAdapterError userInfo:@{NSLocalizedDescriptionKey : @"No mdiation parameters received"}]);
+        completionHandler([NSError errorWithDomain:GADErrorDomain code:GADErrorMediationAdapterError userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"No mediation parameters received", @"")}]);
     }
     else {
-        StartioAdmobParameters *mediationParameters = [[StartioAdmobParameters alloc] initWithParametersJSON:serverConfiguration.credentials[0].settings[@"parameter"]];
+        StartioAdmobParameters *mediationParameters = [[StartioAdmobParameters alloc] init];
+        [mediationParameters readFromJSONString:serverConfiguration.credentials[0].settings[@"parameter"]];
+        
         if (mediationParameters.appId.length != 0) {
-            if ([NSThread isMainThread]) {
+            [self executeBlockOnMainThread:^{
                 [self setupStartioSDKWithMediationParameters:mediationParameters testAdsEnabled:NO];
-                completionHandler(nil);
-            }
-            else {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self setupStartioSDKWithMediationParameters:mediationParameters testAdsEnabled:NO];
-                });
-                completionHandler(nil);
-            }
+            }];
+            completionHandler(nil);
         }
         else {
-            completionHandler([NSError errorWithDomain:GADErrorDomain code:GADErrorMediationAdapterError userInfo:@{NSLocalizedDescriptionKey : @"No Start.io AppID provided yet"}]);
+            completionHandler([NSError errorWithDomain:GADErrorDomain code:GADErrorMediationAdapterError userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"No Start.io AppID provided yet", @"")}]);
         }
     }
 }
@@ -87,7 +78,6 @@ static NSString* const kSettingsParameterKey = @"parameter";
     sdk.returnAdEnabled = NO;
     sdk.consentDialogEnabled = NO;
     [sdk addWrapperWithName:@"AdMob" version:StartioAdmobAdapterVersion];
-    sdk.testAdsEnabled = YES;
 #ifdef DEBUG
     sdk.testAdsEnabled = YES;
 #else
@@ -96,29 +86,33 @@ static NSString* const kSettingsParameterKey = @"parameter";
 }
 
 - (void)loadBannerForAdConfiguration:(nonnull GADMediationBannerAdConfiguration *)adConfiguration completionHandler:(nonnull GADMediationBannerLoadCompletionHandler)completionHandler {
-    self.bannerAdapter = [[StartioAdmobBannerAdapter alloc] init];
-    [self loadAdForAdapter:self.bannerAdapter adConfiguration:adConfiguration completionHandler:completionHandler];
+    self.bannerAdLoader = [[StartioAdmobBannerAdLoader alloc] init];
+    [self loadAdWithLoader:self.bannerAdLoader adConfiguration:adConfiguration completionHandler:completionHandler];
 }
 
 - (void)loadInterstitialForAdConfiguration:(nonnull GADMediationInterstitialAdConfiguration *)adConfiguration completionHandler:(nonnull GADMediationInterstitialLoadCompletionHandler)completionHandler {
-    self.interstitialAdapter = [[StartioAdmobInterstitialAdapter alloc] init];
-    [self loadAdForAdapter:self.interstitialAdapter adConfiguration:adConfiguration completionHandler:completionHandler];
+    self.interstitialAdLoader = [[StartioAdmobInterstitialAdLoader alloc] init];
+    [self loadAdWithLoader:self.interstitialAdLoader adConfiguration:adConfiguration completionHandler:completionHandler];
 }
 
 - (void)loadNativeAdForAdConfiguration:(nonnull GADMediationNativeAdConfiguration *)adConfiguration completionHandler:(nonnull GADMediationNativeLoadCompletionHandler)completionHandler {
-    self.nativeAdapter = [[StartioAdmobNativeAdapter alloc] init];
-    [self loadAdForAdapter:self.nativeAdapter adConfiguration:adConfiguration completionHandler:completionHandler];
+    self.nativeAdLoader = [[StartioAdmobNativeAdLoader alloc] init];
+    [self loadAdWithLoader:self.nativeAdLoader adConfiguration:adConfiguration completionHandler:completionHandler];
 }
 
 - (void)loadRewardedAdForAdConfiguration:(nonnull GADMediationRewardedAdConfiguration *)adConfiguration completionHandler:(nonnull GADMediationRewardedLoadCompletionHandler)completionHandler {
-    self.rewardedAdapter = [[StartioAdmobRewardedAdapter alloc] init];
-    [self loadAdForAdapter:self.rewardedAdapter adConfiguration:adConfiguration completionHandler:completionHandler];
+    self.rewardedAdLoader = [[StartioAdmobRewardedAdLoader alloc] init];
+    [self loadAdWithLoader:self.rewardedAdLoader adConfiguration:adConfiguration completionHandler:completionHandler];
 }
 
-- (void)loadAdForAdapter:(nonnull id<StartioAdmobAdAdapter>)adapter adConfiguration:(nonnull GADMediationAdConfiguration *)adConfiguration completionHandler:(nonnull id)completionHandler {
-    StartioAdmobParameters *parameters = [[StartioAdmobParameters alloc] initWithParametersJSON:adConfiguration.credentials.settings[kSettingsParameterKey]];
-    [StartioAdmobCustomEvent setupStartioSDKWithMediationParameters:parameters testAdsEnabled:adConfiguration.isTestRequest];
-    [adapter loadAdForAdConfiguration:adConfiguration startioAdmobParameters:parameters completionHandler:completionHandler];
+- (void)loadAdWithLoader:(nonnull StartioAdmobBaseAdLoader *)adLoader adConfiguration:(nonnull GADMediationAdConfiguration *)adConfiguration completionHandler:(nonnull id)completionHandler {
+    [StartioAdmobAdapter executeBlockOnMainThread:^{
+        StartioAdmobParameters *parameters = [[StartioAdmobParameters alloc] init];
+        [parameters readFromJSONString:adConfiguration.credentials.settings[kSettingsParameterKey]];
+        
+        [StartioAdmobAdapter setupStartioSDKWithMediationParameters:parameters testAdsEnabled:adConfiguration.isTestRequest];
+        [adLoader loadAdForAdConfiguration:adConfiguration startioAdmobParameters:parameters completionHandler:completionHandler];
+    }];
 }
 
 #pragma mark - Helper methods
@@ -140,6 +134,17 @@ static NSString* const kSettingsParameterKey = @"parameter";
     }
     
     return version;
+}
+
++ (void)executeBlockOnMainThread:(void(^)(void))block {
+    if ([NSThread isMainThread]) {
+        block();
+    }
+    else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            block();
+        });
+    }
 }
 
 @end

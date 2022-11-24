@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-@import Foundation;
-@import GoogleMobileAds;
+#import "StartioAdmobBaseAdLoader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartioAdmobCustomEvent : NSObject <GADMediationAdapter>
+@interface StartioAdmobBannerAdLoader : StartioAdmobBaseAdLoader
 
+@end
+
+@interface StartioAdmobBannerAd : NSObject<GADMediationBannerAd>
+- (instancetype)initWithSTABannerView:(STABannerView *)bannerView;
+- (instancetype)init NS_UNAVAILABLE;
 @end
 
 NS_ASSUME_NONNULL_END

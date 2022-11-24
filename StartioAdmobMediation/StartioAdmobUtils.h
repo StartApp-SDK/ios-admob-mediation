@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ StartioAdmobAdoptedAdLoaderaderader of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-@import Foundation;
+#ifndef StartioAdmobUtils_h
+#define StartioAdmobUtils_h
 
-@class GADMediationAdConfiguration;
-@class StartioAdmobParameters;
 
-NS_ASSUME_NONNULL_BEGIN
+#ifdef DEBUG
+#   define StartioLog(fmt, ...) NSLog((fmt), ##__VA_ARGS__);
+#else
+#   define StartioLog(...)
+#endif
 
-@protocol StartioAdmobAdAdapter <NSObject>
-- (void)loadAdForAdConfiguration:(nonnull GADMediationAdConfiguration *)adConfiguration
-          startioAdmobParameters:(nonnull StartioAdmobParameters *)startioAdmobParameters
-               completionHandler:(id) completionHandler;
-@end
 
-NS_ASSUME_NONNULL_END
+#endif /* StartioAdmobUtils_h */

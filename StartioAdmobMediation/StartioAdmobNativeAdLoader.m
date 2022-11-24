@@ -14,11 +14,78 @@
  * limitations under the License.
  */
 
-#import "StartioAdmobNativeAd.h"
+#import "StartioAdmobNativeAdLoader.h"
+#import "STAAdPreferences+AdMob.h"
 
-#import <StartApp/StartApp.h>
+@interface StartioAdmobNativeAdLoader () <STADelegateProtocol>
 
+@property (nonatomic, strong) STAStartAppNativeAd* startioAd;
 
+@end
+
+@implementation StartioAdmobNativeAdLoader
+
+- (void)performLoadWithAdConfiguration:(GADMediationNativeAdConfiguration *)adConfiguration
+                startioAdmobParameters:(StartioAdmobParameters *)startioAdmobParameters {
+    
+    STANativeAdPreferences *adPrefs = [[STANativeAdPreferences alloc] initWithAdConfiguration:adConfiguration startioAdmobParameters:startioAdmobParameters];
+    for (GADNativeAdImageAdLoaderOptions* imageOptions in adConfiguration.options) {
+        if (![imageOptions isKindOfClass:GADNativeAdImageAdLoaderOptions.class]) {
+            continue;
+        }
+        adPrefs.autoBitmapDownload = !imageOptions.disableImageLoading;
+    }
+    adPrefs.adsNumber = 1;
+    self.startioAd = [[STAStartAppNativeAd alloc] init];
+    [self.startioAd loadAdWithDelegate:self withNativeAdPreferences:adPrefs];
+}
+
+#pragma mark STADelegateProtocol
+- (void)didLoadAd:(STAAbstractAd*)ad {
+    if (self.startioAd.adsDetails.count == 0) {
+        NSError* error = [NSError errorWithDomain:@"StartAppSDK"
+                                             code:STAErrorNoContent
+                                         userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"No fill", @"")}];
+        if (self.completionHandler) {
+            self.completionHandler(nil, error);
+        }
+        StartioLog(@"Start.io native ad is empty. (no fill)");
+    }
+    else {
+        STANativeAdDetails* details = self.startioAd.adsDetails.firstObject;
+        
+        StartioAdmobNativeAd *nativeAd = [[StartioAdmobNativeAd alloc] initWithStartioNativeAd:details];
+        if (self.completionHandler) {
+            self.delegate = self.completionHandler(nativeAd, nil);
+        }
+        StartioLog(@"Start.io native ad did load successfully.");
+    }
+}
+
+- (void)failedLoadAd:(STAAbstractAd*)ad withError:(NSError*)error {
+    if (self.completionHandler) {
+        self.completionHandler(nil, error);
+    }
+    StartioLog(@"Start.io native ad did fail to load with error \"%@\"", error.localizedDescription);
+}
+
+- (void)didSendImpressionForNativeAdDetails:(STANativeAdDetails *)nativeAdDetails {
+    if ([self.delegate respondsToSelector:@selector(reportImpression)]) {
+        [self.delegate reportImpression];
+    }
+    StartioLog(@"Start.io native ad did send an impression.");
+}
+
+- (void)didClickNativeAdDetails:(STANativeAdDetails*)nativeAdDetails {
+    if ([self.delegate respondsToSelector:@selector(reportClick)]) {
+        [self.delegate reportClick];
+    }
+    StartioLog(@"Start.io native ad was clicked.");
+}
+
+@end
+
+#pragma mark - StartioAdmobNativeAd
 @interface StartioAdmobNativeAd ()
 
 @property (nonatomic) STANativeAdDetails* nativeAd;
@@ -51,7 +118,7 @@
     return self;
 }
 
-#pragma mark - GADMediationNativeAd methods
+#pragma mark GADMediationNativeAd methods
 - (BOOL)handlesUserClicks {
     return YES;
 }
@@ -60,7 +127,7 @@
     return YES;
 }
 
-#pragma mark - GADMediatedUnifiedNativeAd methods
+#pragma mark GADMediatedUnifiedNativeAd methods
 
 - (nullable NSString*)advertiser {
     return nil;

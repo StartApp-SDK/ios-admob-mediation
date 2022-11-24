@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#import <StartApp/StartApp.h>
+@import StartApp;
 
 NS_ASSUME_NONNULL_BEGIN
 

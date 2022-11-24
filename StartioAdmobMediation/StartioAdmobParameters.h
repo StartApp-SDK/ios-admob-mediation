@@ -16,26 +16,18 @@
 
 @import Foundation;
 
-@class STAAdPreferences;
-@class STANativeAdPreferences;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface StartioAdmobParameters : NSObject
 
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithParametersJSON:(NSString *)paramsJSON;
+- (void)readFromJSONString:(nullable NSString*)paramsJSON;
 
-@property (nonatomic, copy, nullable) NSString* appId;
-@property (nonatomic, assign) BOOL testAdsEnabled;
-@property (nonatomic, getter=isVideo) BOOL video;
-@property (nonatomic, copy, nullable) NSString *adTag;
-@property (nonatomic, assign) double minCPM;
-@property (nonatomic, copy, nullable) NSString *nativePrimaryImageSize;
-@property (nonatomic, copy, nullable) NSString *nativeSecondaryImageSize;
-
-@property (nonatomic, readonly) STAAdPreferences *adPreferences;
-@property (nonatomic, readonly) STANativeAdPreferences *nativeAdPreferences;
+@property (nonatomic, readonly, nullable) NSString* appId;
+@property (nonatomic, readonly, getter=isVideo) BOOL video;
+@property (nonatomic, readonly, nullable) NSString *adTag;
+@property (nonatomic, readonly) double minCPM;
+@property (nonatomic, readonly, nullable) NSString *nativePrimaryImageSize;
+@property (nonatomic, readonly, nullable) NSString *nativeSecondaryImageSize;
 
 @end
 

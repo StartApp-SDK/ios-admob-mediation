@@ -21,59 +21,44 @@ static NSString* const kAppId = @"startioAppId";
 static NSString* const kInterstitialMode = @"interstitialMode";
 static NSString* const kAdTag = @"adTag";
 static NSString* const kMinCPM = @"minCPM";
-static NSString* const kMuteVideo = @"muteVideo";
 static NSString* const kNativeImageSize = @"nativeImageSize";
 static NSString* const kNativeSecondaryImageSize = @"nativeSecondaryImageSize";
 
+@interface StartioAdmobParameters()
+@property (nonatomic, copy, nullable) NSString* appId;
+@property (nonatomic, getter=isVideo) BOOL video;
+@property (nonatomic, copy, nullable) NSString *adTag;
+@property (nonatomic, assign) double minCPM;
+@property (nonatomic, copy, nullable) NSString *nativePrimaryImageSize;
+@property (nonatomic, copy, nullable) NSString *nativeSecondaryImageSize;
+@end
+
 @implementation StartioAdmobParameters
 
-- (instancetype)initWithParametersJSON:(NSString *)paramsJSON {
-    if (self = [self init]) {
-        [self parseParams:paramsJSON];
-    }
-    return self;
-}
-
-- (void)parseParams:(nullable NSString*)params {
-    if (params == nil) {
+- (void)readFromJSONString:(nullable NSString*)paramsJSON {
+    if (paramsJSON == nil) {
         return;
     }
     
-    NSData* jsonData = [params dataUsingEncoding:NSUTF8StringEncoding];
+    NSData* jsonData = [paramsJSON dataUsingEncoding:NSUTF8StringEncoding];
     NSError* error = nil;
     NSDictionary* jsonMap = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
     if (error || !jsonMap) {
         return;
     }
+    self.appId = jsonMap[kAppId];
     
-    if (jsonMap[kAppId]) {
-        self.appId = jsonMap[kAppId];
-    }
+    self.video = [jsonMap[kInterstitialMode] isKindOfClass:NSString.class] && [jsonMap[kInterstitialMode] isEqualToString:@"VIDEO"];
     
-    if (jsonMap[kInterstitialMode]) {
-        self.video = [jsonMap[kInterstitialMode] isEqualToString:@"VIDEO"];
-    }
+    self.adTag = jsonMap[kAdTag];
 
-    if (jsonMap[kAdTag]) {
-        self.adTag = jsonMap[kAdTag];
-    }
-
-    if (jsonMap[kMinCPM]) {
+    if ([jsonMap[kMinCPM] isKindOfClass:NSNumber.class]) {
         self.minCPM = [jsonMap[kMinCPM] doubleValue];
     }
 
-    if (jsonMap[kMuteVideo]) {
-        // TODO: needs to implement in the sdk STAAdPreferences
-        // self.prefs.muteVideo = [jsonMap[kMuteVideo] boolValue];
-    }
+    self.nativePrimaryImageSize = jsonMap[kNativeImageSize];
 
-    if (jsonMap[kNativeImageSize]) {
-        self.nativePrimaryImageSize = jsonMap[kNativeImageSize];
-    }
-
-    if (jsonMap[kNativeSecondaryImageSize]) {
-        self.nativeSecondaryImageSize = jsonMap[kNativeSecondaryImageSize];
-    }
+    self.nativeSecondaryImageSize = jsonMap[kNativeSecondaryImageSize];
 }
 
 @end
