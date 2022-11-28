@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "startio-admob-mediation"
-  spec.version      = "1.1.0"
+  spec.version      = "2.0.0"
   spec.summary      = "Start.io <-> AdMob iOS Mediation Adapter."
 
   spec.description  = <<-DESC
@@ -21,13 +21,8 @@ Pod::Spec.new do |spec|
 
   spec.requires_arc = true
   spec.static_framework = true
-
-  spec.user_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' } 
-  # spec.xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  # spec.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  # spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
-  spec.dependency "Google-Mobile-Ads-SDK", "~> 8.13.0"
-  spec.dependency "StartAppSDK", "~> 4.7.0"
+  spec.dependency "Google-Mobile-Ads-SDK", "~> 9.13"
+  spec.dependency "StartAppSDK", "~> 4.8"
 
 end

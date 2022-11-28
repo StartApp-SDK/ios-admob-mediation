@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Start.io Inc
+ * Copyright 2022 Start.io Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-@import Foundation;
-@import CoreGraphics;
+#import "StartioAdmobInterstitialAdLoader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class STANativeAdPreferences;
+@interface StartioAdmobRewardedAdLoader : StartioAdmobInterstitialAdLoader
 
-@interface StartioAdmobExtras : NSObject
+@end
 
-- (instancetype)initWithJson:(nullable NSString*)jsonString;
-- (instancetype)initWithJson:(nullable NSString*)jsonString lat:(CGFloat)lat lon:(CGFloat)lon;
-
-@property (nonatomic, copy, nullable) NSString* appId;
-@property (nonatomic, getter=isVideo) BOOL video;
-@property (nonatomic, copy) STANativeAdPreferences* prefs;
+@interface StartioAdmobRewardedAd : StartioAdmobInterstitialAd <GADMediationRewardedAd>
 
 @end
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Start.io Inc
+ * Copyright 2022 Start.io Inc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-@import Foundation;
+#import "StartioAdmobParameters.h"
+@import StartApp;
+@import GoogleMobileAds;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartioAdmobFullscreenAdapter : NSObject
-
+@interface STAAdPreferences (AdMob)
+- (instancetype)initWithAdConfiguration:(GADMediationAdConfiguration *)adConfiguration startioAdmobParameters:(StartioAdmobParameters *)parameters;
 @end
 
 NS_ASSUME_NONNULL_END
