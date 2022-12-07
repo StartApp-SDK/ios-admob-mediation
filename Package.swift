@@ -13,18 +13,28 @@ let package = Package(
             targets: ["StartioAdmobMediation"])
     ],
     dependencies: [
-        .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", Version("9.13.0")..<Version("10.0.0")),
-        .package(url: "https://gitlab.hosts-app.com/sdk/ios-sdk-swift-package.git", branch: "master")
+        .admob,
+        .startApp
     ],
     targets: [
         .target(
             name: "StartioAdmobMediation",
             dependencies: [
-                .product(name: "StartApp", package: "ios-sdk-swift-package"),
-                .product(name: "GoogleMobileAds", package: "swift-package-manager-google-mobile-ads"),
+                .StartApp,
+                .GoogleMobileAds
             ],
             path: "StartioAdmobMediation",
             publicHeadersPath: ""
         )
     ]
 )
+
+extension Package.Dependency {
+    static let admob: Package.Dependency = .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: Version("9.13.0"))
+    static let startApp: Package.Dependency = .package(url: "https://gitlab.hosts-app.com/sdk/ios-sdk-swift-package.git", branch: "master")
+}
+
+extension Target.Dependency {
+    static let GoogleMobileAds: Target.Dependency = .product(name: "GoogleMobileAds", package: "swift-package-manager-google-mobile-ads")
+    static let StartApp: Target.Dependency = .product(name: "StartApp", package: "ios-sdk-swift-package")
+}
