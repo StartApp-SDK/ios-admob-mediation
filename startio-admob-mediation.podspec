@@ -23,6 +23,6 @@ Pod::Spec.new do |spec|
   spec.static_framework = true
   
   spec.dependency "Google-Mobile-Ads-SDK", "~> 9.13"
-  spec.dependency "StartAppSDK", "~> 4.8"
+  spec.dependency "StartAppSDK", "~> 4.9"
 
 end

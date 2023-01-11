@@ -19,9 +19,7 @@
 
 @interface StartioAdmobBannerAdLoader () <STABannerDelegateProtocol>
 
-@property (nonatomic, strong) UIView* fakeView;
-@property (nonatomic, strong) STABannerView* bannerView;
-@property (nonatomic, assign) BOOL isAutoSizeBanner;
+@property (nonatomic, strong) STABannerLoader *bannerLoader;
 
 @end
 
@@ -37,26 +35,43 @@
     
     GADAdSize gadSize = adConfiguration.adSize;
     STABannerSize staSize;
-    
+    STABannerSize staSizeToLoad;
     if ([self getInlineSize:&staSize forGADSize:gadSize]) {
         if (staSize.isAuto) {
-            self.isAutoSizeBanner = YES;
+            staSizeToLoad.isAuto = YES;
             if (!CGSizeEqualToSize(gadSize.size, CGSizeZero)) {
-                self.bannerView = [self createAutoSizeBannerWithContainerSize:CGSizeFromGADAdSize(gadSize) adPreferences:adPrefs];
-            } else if (GADAdSizeIsFluid(gadSize)) {
-                self.bannerView = [self createAutoSizeBannerWithContainerSize:adConfiguration.topViewController.view.frame.size adPreferences:adPrefs];
+                staSizeToLoad.size = CGSizeFromGADAdSize(gadSize);
             }
-        } else {
-            self.bannerView = [[STABannerView alloc] initWithSize:staSize
-                                                       autoOrigin:STAAdOrigin_Bottom
-                                                    adPreferences:adPrefs
-                                                     withDelegate:self];
-            [self.bannerView loadAd];
+            else if (GADAdSizeIsFluid(gadSize)) {
+                staSizeToLoad.size = adConfiguration.topViewController.view.bounds.size;
+            }
         }
-    } else { // called on forced recall when GADAdSizeIsFluid is true
-        self.bannerView = [self createAutoSizeBannerWithContainerSize:CGSizeFromGADAdSize(gadSize) adPreferences:adPrefs];
+        else {
+            staSizeToLoad = staSize;
+        }
+    }
+    else { // called on forced recall when GADAdSizeIsFluid is true
+        staSizeToLoad.isAuto = YES;
+        staSizeToLoad.size = CGSizeFromGADAdSize(gadSize);
     }
     
+    self.bannerLoader = [[STABannerLoader alloc] initWithSize:staSizeToLoad adPreferences:adPrefs];
+    __weak typeof(self)weakSelf = self;
+    [self.bannerLoader loadAdWithCompletion:^(STABannerViewCreator *creator, NSError *error) {
+        __strong typeof(weakSelf)strongSelf = weakSelf;
+        if (error) {
+            if (strongSelf.completionHandler) {
+                strongSelf.completionHandler(nil, error);
+            }
+        }
+        else {
+            StartioAdmobBannerAd *bannerAd = [[StartioAdmobBannerAd alloc] initWithSTABannerViewCreator:creator];
+            if (strongSelf.completionHandler) {
+                bannerAd.delegate = strongSelf.completionHandler(bannerAd, nil);
+            }
+        }
+        strongSelf.completionHandler = nil;
+    }];
 }
 
 - (BOOL)getInlineSize:(STABannerSize*)size forGADSize:(GADAdSize)gadSize {
@@ -90,41 +105,31 @@
     return NO;
 }
 
-- (STABannerView*)createAutoSizeBannerWithContainerSize:(CGSize)containerSize adPreferences:(STAAdPreferences*)prefs {
-    STABannerView* bannerView = [[STABannerView alloc] initWithSize:STA_AutoAdSize
-                                                         autoOrigin:STAAdOrigin_Bottom
-                                                      adPreferences:prefs
-                                                       withDelegate:self];
-    self.fakeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, containerSize.width, containerSize.height)];
-    [self.fakeView addSubview:bannerView];
-    return bannerView;
+@end
+
+#pragma mark - StartioAdmobBannerAd
+@interface StartioAdmobBannerAd()<STABannerDelegateProtocol>
+@property (nonatomic, strong) STABannerViewCreator *bannerViewCreator;
+@property (nonatomic, strong) STABannerView* bannerView;
+@end
+
+@implementation StartioAdmobBannerAd
+- (instancetype)initWithSTABannerViewCreator:(STABannerViewCreator *)bannerViewCreator {
+    self = [super init];
+    if (self) {
+        _bannerViewCreator = bannerViewCreator;
+    }
+    return self;
+}
+
+- (UIView *)view {
+    if (self.bannerView == nil) {
+        self.bannerView = (STABannerView *)[self.bannerViewCreator createBannerViewForDelegate:self supportAutolayout:NO];
+    }
+    return self.bannerView;
 }
 
 #pragma mark STABannerDelegateProtocol
-- (void)bannerAdIsReadyToDisplay:(STABannerViewBase *)banner {
-    if (self.completionHandler) {
-        StartioAdmobBannerAd *bannerAd = [[StartioAdmobBannerAd alloc] initWithSTABannerView:self.bannerView];
-        self.delegate = self.completionHandler(bannerAd, nil);
-        self.completionHandler = nil;
-    }
-    StartioLog(@"Start.io banner ad did load successfully.");
-}
-
-- (void)didDisplayBannerAd:(STABannerViewBase *)banner {
-    if (self.isAutoSizeBanner && self.completionHandler) {
-        StartioAdmobBannerAd *bannerAd = [[StartioAdmobBannerAd alloc] initWithSTABannerView:self.bannerView];
-        self.delegate = self.completionHandler(bannerAd, nil);
-        self.completionHandler = nil;
-    }
-    StartioLog(@"Start.io banner ad did display.");
-}
-
-- (void)failedLoadBannerAd:(STABannerView*)banner withError:(NSError*)error {
-    if (self.completionHandler) {
-        self.completionHandler(nil, error);
-    }
-    StartioLog(@"Start.io banner ad did fail to load with error \"%@\"", error.localizedDescription);
-}
 
 - (void)didSendImpressionForBannerAd:(STABannerViewBase *)banner {
     if ([self.delegate respondsToSelector:@selector(reportImpression)]) {
@@ -138,25 +143,5 @@
         [self.delegate reportClick];
     }
     StartioLog(@"Start.io banner ad was clicked.");
-}
-
-@end
-
-#pragma mark - StartioAdmobBannerAd
-@interface StartioAdmobBannerAd()
-@property (nonatomic, strong) STABannerView *bannerView;
-@end
-
-@implementation StartioAdmobBannerAd
-- (instancetype)initWithSTABannerView:(STABannerView *)bannerView {
-    self = [super init];
-    if (self) {
-        _bannerView = bannerView;
-    }
-    return self;
-}
-
-- (UIView *)view {
-    return self.bannerView;
 }
 @end
