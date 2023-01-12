@@ -23,8 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface StartioAdmobBannerAd : NSObject<GADMediationBannerAd>
-- (instancetype)initWithSTABannerView:(STABannerView *)bannerView;
+- (instancetype)initWithSTABannerViewCreator:(STABannerViewCreator *)bannerViewCreator;
 - (instancetype)init NS_UNAVAILABLE;
+
+@property (nonatomic, weak) id<GADMediationAdEventDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END
