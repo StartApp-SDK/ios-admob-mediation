@@ -17,6 +17,6 @@
 #ifndef StartioAdmobMediationConstants_h
 #define StartioAdmobMediationConstants_h
 
-static NSString *const StartioAdmobAdapterVersion = @"2.1.0";
+static NSString *const StartioAdmobAdapterVersion = @"2.1.1";
 
 #endif /* StartioAdmobMediationConstants_h */
