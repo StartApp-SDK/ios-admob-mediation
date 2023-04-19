@@ -30,8 +30,19 @@
         
         self.minCPM = parameters.minCPM;
         self.adTag = parameters.adTag;
+        
+        if (nil == self.placementId) {
+            self.placementId = [self.class unitIdFromAdConfiguration:adConfiguration];
+        }
     }
     return self;
+}
+
++ (NSString *)unitIdFromAdConfiguration:(GADMediationAdConfiguration *)adConfiguration {
+    NSDictionary *privateAdConfiguration = [adConfiguration valueForKey:@"adConfiguration"];
+    privateAdConfiguration = [privateAdConfiguration isKindOfClass:[NSDictionary class]] ? privateAdConfiguration : nil;
+    NSString *unitId = privateAdConfiguration[@"initial_ad_unit_id"];
+    return  unitId;
 }
 
 @end
