@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StartApp-SDK/StartAppSDK-SwiftPackage.git",
       "state" : {
-        "revision" : "be303f4784dc187311955aa0c0cdce31a37f83f8",
-        "version" : "4.9.0"
+        "revision" : "a2336f2fda7fee3531a98498e9c96a27e3bc8f4f",
+        "version" : "4.9.2"
       }
     },
     {
