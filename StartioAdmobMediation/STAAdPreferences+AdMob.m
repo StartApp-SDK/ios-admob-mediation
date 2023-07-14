@@ -39,7 +39,13 @@
 }
 
 + (NSString *)unitIdFromAdConfiguration:(GADMediationAdConfiguration *)adConfiguration {
-    NSDictionary *privateAdConfiguration = [adConfiguration valueForKey:@"adConfiguration"];
+    NSDictionary *privateAdConfiguration = nil;
+    @try {
+        [adConfiguration valueForKey:@"adConfiguration"];
+    } @catch (NSException *exception) {
+        
+    }
+    
     privateAdConfiguration = [privateAdConfiguration isKindOfClass:[NSDictionary class]] ? privateAdConfiguration : nil;
     NSString *unitId = privateAdConfiguration[@"initial_ad_unit_id"];
     return  unitId;
