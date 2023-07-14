@@ -77,7 +77,7 @@ static NSString* const kSettingsParameterKey = @"parameter";
     sdk.appID = mediationParameters.appId;
     sdk.returnAdEnabled = NO;
     sdk.consentDialogEnabled = NO;
-    [sdk addWrapperWithName:@"AdMob" version:StartioAdmobAdapterVersion];
+    [sdk enableMediationModeFor:@"AdMob" version:StartioAdmobAdapterVersion];
 #ifdef DEBUG
     sdk.testAdsEnabled = YES;
 #else
