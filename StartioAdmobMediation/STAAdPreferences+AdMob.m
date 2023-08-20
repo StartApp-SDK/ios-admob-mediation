@@ -21,13 +21,6 @@
 - (instancetype)initWithAdConfiguration:(GADMediationAdConfiguration *)adConfiguration startioAdmobParameters:(StartioAdmobParameters *)parameters {
     self = [super init];
     if (self) {
-        if (adConfiguration.hasUserLocation) {
-            STAUserLocation *staLocation = [[STAUserLocation alloc] init];
-            staLocation.latitude = adConfiguration.userLatitude;
-            staLocation.longitude = adConfiguration.userLongitude;
-            self.userLocation = staLocation;
-        }
-        
         self.minCPM = parameters.minCPM;
         self.adTag = parameters.adTag;
         
