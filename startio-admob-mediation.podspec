@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE" }
   spec.author       = { "iOS Dev" => "iosdev@startapp.com" }
   
-  spec.platform     = :ios, "10.0"
+  spec.platform     = :ios, "11.0"
   spec.source       = { :git => "https://github.com/StartApp-SDK/ios-admob-mediation.git", :tag => spec.version.to_s }
   spec.source_files  = "StartioAdmobMediation/**/*.{h,m}"
   # spec.public_header_files = "StartioAdmobMediation/**/*.h"
@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.static_framework = true
   
-  spec.dependency "Google-Mobile-Ads-SDK", "~> 9"
+  spec.dependency "Google-Mobile-Ads-SDK", "~> 10"
   spec.dependency "StartAppSDK", ">= 4.10.0", "< 5"
 
 end
