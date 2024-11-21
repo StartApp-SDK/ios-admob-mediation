@@ -83,13 +83,13 @@
 }
 
 - (void)didCloseAd:(STAAbstractAd*)ad {
+    StartioLog(@"Start.io %@ did dismiss.", self.adNameForLog);
     if ([self.delegate respondsToSelector:@selector(willDismissFullScreenView)]) {
         [self.delegate willDismissFullScreenView];
     }
     if ([self.delegate respondsToSelector:@selector(didDismissFullScreenView)]) {
         [self.delegate didDismissFullScreenView];
     }
-    StartioLog(@"Start.io %@ did dismiss.", self.adNameForLog);
 }
 
 - (void)didClickAd:(STAAbstractAd*)ad {

@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "StartioAdmobMediation",
-    platforms: [.iOS(.v11)],
+    platforms: [.iOS(.v12)],
     products: [
         .library(
             name: "StartioAdmobMediation",
@@ -29,8 +29,8 @@ let package = Package(
 )
 
 extension Package.Dependency {
-    static let admob: Package.Dependency = .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: Version("10.0.0"))
-    static let startApp: Package.Dependency = .package(url: "https://github.com/StartApp-SDK/StartAppSDK-SwiftPackage.git", from: Version("4.10.0"))
+    static let admob: Package.Dependency = .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: Version("11.12.0"))
+    static let startApp: Package.Dependency = .package(url: "https://github.com/StartApp-SDK/StartAppSDK-SwiftPackage.git", from: Version("4.10.5"))
 }
 
 extension Target.Dependency {
