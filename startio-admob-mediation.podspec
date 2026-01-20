@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "startio-admob-mediation"
-  spec.version      = "3.0.1"
+  spec.version      = "3.0.2"
   spec.summary      = "Start.io <-> AdMob iOS Mediation Adapter."
 
   spec.description  = <<-DESC
@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.static_framework = true
   
-  spec.dependency "Google-Mobile-Ads-SDK", "~> 11.12"
-  spec.dependency "StartAppSDK", "~> 4.10"
+  spec.dependency "Google-Mobile-Ads-SDK", "~> 12.14"
+  spec.dependency "StartAppSDK", "~> 4.13"
 
 end
