@@ -17,12 +17,12 @@
 #import "StartioAdmobParameters.h"
 @import StartApp;
 
-static NSString* const kAppId = @"startioAppId";
-static NSString* const kInterstitialMode = @"interstitialMode";
-static NSString* const kAdTag = @"adTag";
-static NSString* const kMinCPM = @"minCPM";
-static NSString* const kNativeImageSize = @"nativeImageSize";
-static NSString* const kNativeSecondaryImageSize = @"nativeSecondaryImageSize";
+static NSString* const kAppId = @"appid";
+static NSString* const kInterstitialMode = @"interstitialmode";
+static NSString* const kAdTag = @"adtag";
+static NSString* const kMinCPM = @"mincpm";
+static NSString* const kNativeImageSize = @"nativeimagesize";
+static NSString* const kNativeSecondaryImageSize = @"nativesecondaryimagesize";
 
 @interface StartioAdmobParameters()
 @property (nonatomic, copy, nullable) NSString* appId;
