@@ -18,6 +18,7 @@
 @import StartApp;
 
 static NSString* const kAppId = @"startioAppId";
+static NSString* const kAppId_legacy = @"startappAppId";
 static NSString* const kInterstitialMode = @"interstitialMode";
 static NSString* const kAdTag = @"adTag";
 static NSString* const kMinCPM = @"minCPM";
@@ -47,6 +48,9 @@ static NSString* const kNativeSecondaryImageSize = @"nativeSecondaryImageSize";
         return;
     }
     self.appId = jsonMap[kAppId];
+    if (self.appId == nil) {
+        self.appId = jsonMap[kAppId_legacy];
+    }
     
     self.video = [jsonMap[kInterstitialMode] isKindOfClass:NSString.class] && [jsonMap[kInterstitialMode] isEqualToString:@"VIDEO"];
     

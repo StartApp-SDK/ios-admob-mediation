@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "startio-admob-mediation"
-  spec.version      = "3.0.2"
+  spec.version      = "3.0.3"
   spec.summary      = "Start.io <-> AdMob iOS Mediation Adapter."
 
   spec.description  = <<-DESC
