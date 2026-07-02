@@ -30,7 +30,7 @@ let package = Package(
 
 extension Package.Dependency {
     static let admob: Package.Dependency = .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: Version("13.5.1"))
-    static let startApp: Package.Dependency = .package(url: "https://github.com/StartApp-SDK/StartAppSDK-SwiftPackage.git", from: Version("4.13.0"))
+    static let startApp: Package.Dependency = .package(url: "https://github.com/StartApp-SDK/StartAppSDK-SwiftPackage.git", from: Version("4.14.0"))
 }
 
 extension Target.Dependency {
