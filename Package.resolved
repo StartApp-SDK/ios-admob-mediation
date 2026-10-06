@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StartApp-SDK/StartAppSDK-SwiftPackage.git",
       "state" : {
-        "revision" : "1a3743ea5c8197313c95ae4d0ca1757bb098b60e",
-        "version" : "4.10.5"
+        "revision" : "d0d388f796e6231a15c3fad7c49ca8dfe4373dcf",
+        "version" : "4.15.0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
       "state" : {
-        "revision" : "82c49f703da08f6c20715fd8bb8dfe5d94a2f187",
-        "version" : "11.12.0"
+        "revision" : "d1fa1f5c1dfe3b43d56c73f4de388ad3316618bc",
+        "version" : "13.11.0"
       }
     },
     {
